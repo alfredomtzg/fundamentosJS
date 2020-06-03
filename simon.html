@@ -124,6 +124,8 @@
         }
 
         siguienteNivel(){
+          this.subNivel = 0
+          this.nombreAtributo = 'valor'
           this.iluminarSecuencia()
           this.agregarEventosClick()
         }
@@ -138,6 +140,19 @@
             return 'naranja'
             case 3:
             return 'verde'
+          }
+        }
+
+        transformarColorANumero (color){
+          switch(numero){
+            case 'celeste':
+            return 0
+            case 'violeta':
+            return 1
+            case 'naranja':
+            return 2
+            case 'verde':
+            return 3
           }
         }
 
@@ -158,15 +173,23 @@
         }
 
         agregarEventosClick(){
-          this.colores.celeste.addEventListener('click', this.elegirColor.bind(this))
-          this.colores.verde.addEventListener('click', this.elegirColor.bind(this))
-          this.colores.violeta.addEventListener('click', this.elegirColor.bind(this))
-          this.colores.naranja.addEventListener('click', this.elegirColor.bind(this))
+          this.colores.celeste.addEventListener('click', this.elegirColor)
+          this.colores.verde.addEventListener('click', this.elegirColor)
+          this.colores.violeta.addEventListener('click', this.elegirColor)
+          this.colores.naranja.addEventListener('click', this.elegirColor)
         }
 
         elegirColor(ev){
-          console.log(this);
-
+          const nombreColor = ev.target.dataset.color
+          const numeroColor = transformarColorANumero(nombrecolor)
+          this.iluminarColor(nombreColor)
+          if (numeroColor===this.secuencia[this.subnivel]){
+            this.subnivel++
+            if (this.subnivel === this.nivel){
+              this.nivel++
+              // this.eliminarEventosclick
+            }
+          }
         }
       }
 
